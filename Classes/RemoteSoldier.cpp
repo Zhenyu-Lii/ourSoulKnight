@@ -113,13 +113,13 @@ void RemoteSoldier::die()
 {
 	srand((unsigned)time(nullptr));
 	int random = rand() % 100;
-	if(random > 90 && random % 2 == 0)
+	if(random > 50 && random % 2 == 0)
 	{
 		Items* item = Items::create(REDBOTTLE);
 		item->setPosition(this->getPosition());
 		_currentScene->addChild(item);
 	}
-	else if(random > 90 && random % 2 != 0)
+	else if(random > 50 && random % 2 != 0)
 	{
 		Items* item = Items::create(BLUEBOTTLE);
 		item->setPosition(this->getPosition());

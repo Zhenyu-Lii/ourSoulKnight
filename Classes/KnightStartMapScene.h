@@ -15,16 +15,19 @@ public:
 	CREATE_FUNC(KnightStartMap);
 	void start_menuCloseCallback(Ref* pSender);
 	void home_menuCloseCallback(Ref* pSender);
+	void music_menuCloseCallback(Ref* pSender);
 	void update(float dt);
 private:
 	cocos2d::TMXTiledMap *_tiledmap;//地图类中相关地图
 	cocos2d::TMXLayer *_background;//背景层
 	Player* m_player;
-
+	MenuItemImage* music_button;
+	bool musicOff;
+	Sprite* suspend_scene;
+	MenuItemImage* suspend_start;
+	MenuItemImage* home_button;
 
 };
 
 
 #endif //KnightstartmapScene.h !
-
-

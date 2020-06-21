@@ -11,7 +11,8 @@ public:
 	static cocos2d::Scene* createScene();
 	virtual bool init();
 	CREATE_FUNC(safetymap);
-
+	void scheduleBlood(float delta);
+	virtual void update(float dt);
 	RemoteSoldierManager* m_remoteSoldierManager;
 
 private:
@@ -20,10 +21,34 @@ private:
 	Sprite *_player;
 	Player* m_player;
 	RemoteSoldier* m_monster;								//测试武器用的monster
+	ProgressTimer* bloodProgress;
+	ProgressTimer* MPProgress;
+	ProgressTimer* ACProgress;
+	Knight* mplayer;
 
+	std::string bloodNum;
+	char bloodChar[3];
+	Label* bloodLabel;
+
+	std::string  ACNum;
+	char ACChar[3];
+	Label* ACLabel;
+
+	std::string MPNum;
+	char MPChar[7];
+	Label* MPLabel;
 protected:
 	virtual bool onContactBegin(PhysicsContact& contact);	//碰撞后的回调
 	virtual bool onTouchBegin(Touch* touch, Event* event);	//点击鼠标后的回调
+	void menuCloseCallback(Ref* pSender);
+	void start_menuCloseCallback(Ref* pSender);
+	void home_menuCloseCallback(Ref* pSender);
+	void music_menuCloseCallback(Ref* pSender);
+	bool musicOnOff;
+	Sprite* suspend_scene;
+	MenuItemImage* suspend_start;
+	MenuItemImage* home_button;
+	MenuItemImage* music_button;
 };
 
 #endif // __SAFETYMAP_SCENE_H__

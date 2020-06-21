@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="32" height="18" tilewidth="32" tileheight="32" nextobjectid="3">
+ <tileset firstgid="1" name="asd" tilewidth="32" tileheight="32" tilecount="16" columns="4">
+  <image source="knight_floor.png" width="129" height="128"/>
+ </tileset>
+ <tileset firstgid="17" name="meta" tilewidth="32" tileheight="32" tilecount="4" columns="4">
+  <image source="meta.png" width="128" height="32"/>
+  <tile id="0">
+   <properties>
+    <property name="Collidable" type="bool" value="true"/>
+   </properties>
+  </tile>
+ </tileset>
+ <layer name="块层 1" width="32" height="18">
+  <data encoding="base64" compression="zlib">
+   eJzllNsOxCAIRKnVur2o/f+vXSeZiew7b0tCvIYDKJiZpalt6kHdp1a3Pqd+OF5Ts8XJS7uJDPjxTL2n9qmD55lz+LUF8iGFXPhycA3Ozr3GvZt+9GA+OBc54CbnSye3cB93N6cRAlYmR+99krVzXnl+c0/+RAjeW7G/tF3ok7jDVh6arZxFSKJd5fpj653B2Oz3/zeOI4jv/7tYig/rgyPuVZ4XjhGinMP2sFVnqj+wVYPqFfqLEdLpw03uab//QH6pJhH3Y3HxK6eyqx4gf17HVp9Uv4gQxXbZetvHVqyDPOVfOYr6/7utPlttxQ4fOvdVj8XdjeKr/hvtqg8lsg63n6kPNULUZxWj3uBy7Orm4KouI8T/b4zqu5mj8qGcZPJrEN/78W/yBXBKB5g=
+  </data>
+ </layer>
+ <layer name="meta" width="32" height="18">
+  <data encoding="base64" compression="zlib">
+   eJxjYBgFAw0EKcDUsn8gwaj9o/aP2j9q/0i2fyDLf3LcOlwAACLkAtw=
+  </data>
+ </layer>
+ <objectgroup name="objects">
+  <object id="1" name="PlayerPoint" x="80" y="273" width="33" height="46"/>
+  <object id="2" x="351" y="-83" width="1"/>
+ </objectgroup>
+</map>
