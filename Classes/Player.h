@@ -16,6 +16,8 @@ class Player :public Entity {
 	CC_SYNTHESIZE(Weapon*, _currentWeapon, CurrentWeapon);
 	CC_SYNTHESIZE(Vector<Weapon*> , _weaponBag, WeaponBag);
 	CC_SYNTHESIZE(RemoteSoldier*, _lockedTarget, LockedTarget);
+	CC_SYNTHESIZE(bool, _usingSkill, UsingSkill);
+
 
 public:
 	Player();
@@ -41,6 +43,7 @@ public:
 	virtual void set_tag_position(int x, int y);
 	void setTiledMap(TMXTiledMap* map);
 	void bind_scene(Scene* scene);
+	void activateSkill();
 private:
 	Weapon* m_weapon;											//Player当前使用的武�?
 	TMXLayer* meta;												//检测碰撞的地图�?

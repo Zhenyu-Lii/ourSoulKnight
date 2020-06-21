@@ -57,6 +57,13 @@ void SimpleMoveController::registeKeyBoardEvent()
 	auto keyBoardListener = EventListenerKeyboard::create();
 	keyBoardListener->onKeyPressed = [&](EventKeyboard::KeyCode keyCode, Event* event) {
 		switch (keyCode) {
+		case EventKeyboard::KeyCode::KEY_L://技能键
+		{
+			m_player->activateSkill();
+			m_player->skill();
+			break;
+		}
+
 		case EventKeyboard::KeyCode::KEY_J://开火键
 		{
 			if (m_player->getLockedTarget() == NULL ||
@@ -95,7 +102,13 @@ void SimpleMoveController::registeKeyBoardEvent()
 				//如果没找到锁定的目标，就向前方开火
 				else {
 					m_player->resetWeaponPos();
-					m_player->attack(m_scene, Vec2(m_player->getPositionX() + 1, m_player->getPositionY()));
+					if (m_player->getCurrentWeapon()->isFlippedX() == false) {
+						m_player->attack(m_scene, Vec2(m_player->getPositionX() + 1, m_player->getPositionY()));
+					}
+					else {
+						m_player->attack(m_scene, Vec2(m_player->getPositionX() - 1, m_player->getPositionY()));
+
+					}
 				}
 			}
 

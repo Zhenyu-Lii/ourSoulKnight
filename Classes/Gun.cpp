@@ -34,7 +34,7 @@ bool Gun::init(const std::string& filename)
 	//ÐÞÕýÍ¼Æ¬Ëõ·Å
 	this->setScale(0.08);
 	//ÎäÆ÷Î»ÖÃ
-	this->setAnchorPoint(Vec2(0.1, 0.1));
+	this->setAnchorPoint(Vec2(0.3, 0.3));
 	return true;
 }
 

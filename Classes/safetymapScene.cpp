@@ -49,8 +49,8 @@ bool safetymap::init()
 
 	Sprite* player_sprite = Sprite::create("turn right 1.png");
 	Knight* mplayer = Knight::create();
-	Sword* initialWeapon = Sword::create("LightSaber.png");
-	ShotGun* secondWeapon = ShotGun::create("GoblinShotGun.png");
+	Gun* initialWeapon = Gun::create("BrokenPistol.png");
+	Ax* secondWeapon = Ax::create("BroadSword.png");
 	mplayer->bindSprite(player_sprite);
 	mplayer->bindInitWeapon(initialWeapon);
 	mplayer->bindWeapon(secondWeapon);
@@ -178,7 +178,13 @@ bool safetymap::onTouchBegin(Touch* touch, Event* event) {
 		//如果没找到锁定的目标，就向前方开火
 		else {
 			m_player->resetWeaponPos();
-			m_player->attack(this, Vec2(m_player->getPositionX() + 1, m_player->getPositionY()));
+			if (m_player->getCurrentWeapon()->isFlippedX() == false) {
+				m_player->attack(this, Vec2(m_player->getPositionX() + 1, m_player->getPositionY()));
+			}
+			else {
+				m_player->attack(this, Vec2(m_player->getPositionX() - 1, m_player->getPositionY()));
+
+			}
 		}
 	}
 	

@@ -5,6 +5,7 @@
 USING_NS_CC;
 
 class Knight :public Player {
+
 public:
 	Knight();
 	~Knight();
