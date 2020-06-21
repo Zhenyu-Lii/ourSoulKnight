@@ -54,28 +54,31 @@ void RemoteSoldierManager::createMonsters()
 
 void RemoteSoldierManager::update(float dt)
 {
+	int i = 0;
 	for (auto remoteSoldier : m_remoteSoldierArr)
 	{
+		srand((unsigned)time(nullptr));
 		if(!(remoteSoldier->getalreadyDead()))
 		{
-			int random = rand() % 4;
+			i++;
+			int random = (rand()+ i) % 4;
 			//log("random:%d", random);
 			//todo:关于地图边界的问题
 			if (random == 0) //up
 			{
-				remoteSoldier->setPositionY(remoteSoldier->getPositionY() + 4);
+				remoteSoldier->setPositionY(remoteSoldier->getPositionY() + 1);
 			}
 			else if (random == 1) //down
 			{
-				remoteSoldier->setPositionY(remoteSoldier->getPositionY() - 4);
+				remoteSoldier->setPositionY(remoteSoldier->getPositionY() - 1);
 			}
 			else if (random == 2) //left
 			{
-				remoteSoldier->setPositionX(remoteSoldier->getPositionX() - 4);
+				remoteSoldier->setPositionX(remoteSoldier->getPositionX() - 1);
 			}
 			else //right
 			{
-				remoteSoldier->setPositionX(remoteSoldier->getPositionX() + 4);
+				remoteSoldier->setPositionX(remoteSoldier->getPositionX() + 1);
 			}
 			//log("remoteSoldier:x=%f, y=%f", remoteSoldier->getPositionX(), remoteSoldier->getPositionY());
 		}

@@ -92,6 +92,9 @@
  <tileset firstgid="107" name="weapon_information" tilewidth="162" tileheight="94" tilecount="1" columns="1">
   <image source="weapon_information.PNG" width="162" height="94"/>
  </tileset>
+ <tileset firstgid="108" name="monster_informaion" tilewidth="99" tileheight="114" tilecount="1" columns="1">
+  <image source="monster_information.PNG" width="99" height="114"/>
+ </tileset>
  <layer name="floor1" width="40" height="60">
   <data encoding="base64" compression="zlib">
    eJztziEOACAQBLHDYDD8/7X4k6gltMn4qQIg2Qirm2F1Oyx//vz58+fvpb91+QcAAAAAAD85P/Qb+A==
@@ -225,6 +228,11 @@
  <layer name="weapon_information" width="40" height="60">
   <data encoding="base64" compression="zlib">
    eJztziEBAAAMAjD6vr9/BwxmS7AEAAAAAAAAWLp1AACA2gM+AABs
+  </data>
+ </layer>
+ <layer name="monster_information" width="40" height="60">
+  <data encoding="base64" compression="zlib">
+   eJztzjENAAAIA7AJxv+NjCXQKmgCAAAAAAAAXDLtAADAIwsmDABt
   </data>
  </layer>
  <objectgroup name="objects_knight">

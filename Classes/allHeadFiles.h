@@ -17,6 +17,8 @@
 #include "Weapon.h"
 #include "Gun.h"
 #include "ShotGun.h"
+#include "Sword.h"
+#include "Ax.h"
 
 //¿ØÖÆ
 //#include "audio.h"

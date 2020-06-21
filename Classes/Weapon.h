@@ -7,7 +7,7 @@ USING_NS_CC;
 
 class Weapon :public Sprite {
 	CC_SYNTHESIZE(int, _attack, Attack);						//¹¥»÷Á¦
-	CC_SYNTHESIZE(int, _attackRadius, attackRadius);			//¹¥»÷°ë¾¶
+	CC_SYNTHESIZE(float, _attackRadius, attackRadius);			//¹¥»÷°ë¾¶
 	CC_SYNTHESIZE(int, _mpConsumption, MpConsume);				//µ¥´Î¹¥»÷ÄÜÁ¿ÏûºÄ
 	CC_SYNTHESIZE(int, _bulletSpeed, bulletSpeed);
 

@@ -7,9 +7,6 @@ ShotGun::ShotGun() {
 	_attackRadius = 350;
 	_bulletSpeed = 180;
 	_bulletType = SHORTREMOTE;
-
-	//武器位置
-	this->setAnchorPoint(Vec2(0.1, 0.1));
 }
 ShotGun::~ShotGun() {
 
@@ -32,15 +29,28 @@ bool ShotGun::init(const std::string& filename)
 	if (!Sprite::initWithFile(filename)) {
 		return false;
 	}
-	this->setScale(0.15);
+	//修正图片缩放
+	this->setScale(0.14);
+	//武器位置
+	this->setAnchorPoint(Vec2(0.3, 0.5));
 	return true;
 }
 
 void ShotGun::fire(Scene* _currentScene, const Vec2& pos, Entity* player) {
-	
-	//攻击方向
+
+	//设置武器攻击方向
 	auto direction = pos - this->getParent()->getPosition();
 	direction.normalize();
+	if (direction.x >= 0 && this->isFlippedX() == false) {
+		float temp = (-1)*(180 / PI)* atan(direction.y / direction.x);
+		this->setRotation(temp);
+	}
+	else if (direction.x < 0 && this->isFlippedX() == true) {
+		float temp = (180 / PI)* atan(direction.y / direction.x);
+		this->setRotation(temp);
+	}
+	
+
 	direction = reduceBy15Degree(reduceBy15Degree(direction));
 	
 	//创建子弹

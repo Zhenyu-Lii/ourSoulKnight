@@ -1,0 +1,244 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="40" height="60" tilewidth="32" tileheight="32" nextobjectid="5">
+ <tileset firstgid="1" name="floor1" tilewidth="32" tileheight="32" tilecount="16" columns="4">
+  <image source="safetymap_floor.PNG" width="128" height="128"/>
+ </tileset>
+ <tileset firstgid="17" name="carpet" tilewidth="199" tileheight="141" tilecount="1" columns="1">
+  <image source="carpet.png" width="199" height="141"/>
+ </tileset>
+ <tileset firstgid="18" name="niudan" tilewidth="55" tileheight="115" tilecount="1" columns="1">
+  <image source="扭蛋机.png" width="55" height="115"/>
+ </tileset>
+ <tileset firstgid="19" name="floor_edge" tilewidth="32" tileheight="32" tilecount="1" columns="1">
+  <image source="floor_edge.PNG" width="32" height="32"/>
+ </tileset>
+ <tileset firstgid="20" name="box" tilewidth="32" tileheight="46" tilecount="1" columns="1">
+  <image source="box.png" width="32" height="46"/>
+ </tileset>
+ <tileset firstgid="21" name="start_door" tilewidth="128" tileheight="118" tilecount="1" columns="1">
+  <image source="start_door.png" width="128" height="118"/>
+ </tileset>
+ <tileset firstgid="22" name="black_wall" tilewidth="128" tileheight="167" spacing="1" tilecount="1" columns="1">
+  <image source="black_wall.png" width="128" height="167"/>
+ </tileset>
+ <tileset firstgid="23" name="refrigerator" tilewidth="48" tileheight="111" spacing="1" tilecount="1" columns="1">
+  <image source="refrigerator.png" width="48" height="111"/>
+ </tileset>
+ <tileset firstgid="24" name="box1" tilewidth="32" tileheight="48" spacing="1" tilecount="1" columns="1">
+  <image source="box1.png" width="32" height="48"/>
+ </tileset>
+ <tileset firstgid="25" name="start_table" tilewidth="128" tileheight="122" tilecount="1" columns="1">
+  <image source="table_start.png" width="128" height="122"/>
+ </tileset>
+ <tileset firstgid="26" name="picture" tilewidth="128" tileheight="81" tilecount="1" columns="1">
+  <image source="picture_startmap.png" width="128" height="81"/>
+ </tileset>
+ <tileset firstgid="27" name="ranger" tilewidth="32" tileheight="32" tilecount="36" columns="6">
+  <image source="ranger.png" width="192" height="193"/>
+ </tileset>
+ <tileset firstgid="63" name="edge1" tilewidth="32" tileheight="32" tilecount="2" columns="1">
+  <image source="edge.png" width="32" height="64"/>
+ </tileset>
+ <tileset firstgid="65" name="entrance" tilewidth="160" tileheight="131" tilecount="1" columns="1">
+  <image source="entrance.png" width="160" height="131"/>
+ </tileset>
+ <tileset firstgid="66" name="steps" tilewidth="32" tileheight="32" tilecount="1" columns="1">
+  <image source="steps.png" width="32" height="33"/>
+ </tileset>
+ <tileset firstgid="67" name="sofa" tilewidth="128" tileheight="68" tilecount="1" columns="1">
+  <image source="sofa.png" width="128" height="68"/>
+ </tileset>
+ <tileset firstgid="68" name="meta" tilewidth="32" tileheight="32" tilecount="4" columns="4">
+  <image source="meta.png" width="128" height="32"/>
+  <tile id="0">
+   <properties>
+    <property name="Collidable" type="bool" value="true"/>
+   </properties>
+  </tile>
+ </tileset>
+ <tileset firstgid="72" name="back_door" tilewidth="224" tileheight="243" tilecount="1" columns="1">
+  <image source="back_door.png" width="224" height="245"/>
+ </tileset>
+ <tileset firstgid="73" name="black_floor" tilewidth="32" tileheight="32" tilecount="16" columns="4">
+  <image source="black_floor.PNG" width="128" height="128"/>
+ </tileset>
+ <tileset firstgid="89" name="information_wall" tilewidth="32" tileheight="102" tilecount="9" columns="3">
+  <image source="information_wall.png" width="108" height="343"/>
+ </tileset>
+ <tileset firstgid="98" name="bullet_information" tilewidth="96" tileheight="58" tilecount="1" columns="1">
+  <image source="bullet_information.PNG" width="96" height="58"/>
+ </tileset>
+ <tileset firstgid="99" name="end_box" tilewidth="160" tileheight="130" tilecount="1" columns="1">
+  <image source="end_box.PNG" width="160" height="130"/>
+ </tileset>
+ <tileset firstgid="100" name="end_wall1" tilewidth="32" tileheight="50" tilecount="1" columns="1">
+  <image source="end_wall1.png" width="32" height="50"/>
+ </tileset>
+ <tileset firstgid="101" name="end_wall2" tilewidth="32" tileheight="40" tilecount="2" columns="2">
+  <image source="end_wall2.png" width="64" height="40"/>
+ </tileset>
+ <tileset firstgid="103" name="bulletboard" tilewidth="96" tileheight="57" tilecount="1" columns="1">
+  <image source="bulletboard.PNG" width="96" height="57"/>
+ </tileset>
+ <tileset firstgid="104" name="bullet1" tilewidth="64" tileheight="74" tilecount="1" columns="1">
+  <image source="bullet1.PNG" width="64" height="74"/>
+ </tileset>
+ <tileset firstgid="105" name="weaponboard" tilewidth="226" tileheight="64" tilecount="1" columns="1">
+  <image source="weaponboard.PNG" width="226" height="64"/>
+ </tileset>
+ <tileset firstgid="106" name="weapon1" tilewidth="64" tileheight="73" tilecount="1" columns="1">
+  <image source="weapon1.PNG" width="64" height="73"/>
+ </tileset>
+ <tileset firstgid="107" name="weapon_information" tilewidth="162" tileheight="94" tilecount="1" columns="1">
+  <image source="weapon_information.PNG" width="162" height="94"/>
+ </tileset>
+ <layer name="floor1" width="40" height="60">
+  <data encoding="base64" compression="zlib">
+   eJztziEOACAQBLHDYDD8/7X4k6gltMn4qQIg2Qirm2F1Oyx//vz58+fvpb91+QcAAAAAAD85P/Qb+A==
+  </data>
+ </layer>
+ <layer name="black_floor" width="40" height="60">
+  <data encoding="base64" compression="zlib">
+   eJztzrEJAAAIwDDfc/D/d8QD3EUS6N4IAAAAAAAAACAPN+pw/v7/AbsGbiw6DA==
+  </data>
+ </layer>
+ <layer name="end_box" width="40" height="60">
+  <data encoding="base64" compression="zlib">
+   eJztzkERAAAIA6B1tX8HS+z0AwlIAAAAAAAAAAC4MN8BoG4BohcAZA==
+  </data>
+ </layer>
+ <layer name="information_wall" width="40" height="60">
+  <data encoding="base64" compression="zlib">
+   eJztyrEJACAQBEHbFAT770I+v+ARPpuBzXYtAAAAAAAAADp2qPtNV04oSd905YaS9E0HAL8evLokqQ==
+  </data>
+ </layer>
+ <layer name="bulletboard" width="40" height="60">
+  <data encoding="base64" compression="zlib">
+   eJztzjEBAAAIA6C1tX8DG+zVAxKQAAAAAAAAAPDVXAcAgGoBO+EAaA==
+  </data>
+ </layer>
+ <layer name="bullet1" width="40" height="60">
+  <data encoding="base64" compression="zlib">
+   eJztzjENAAAIA7DJxb8C7ikgJK2CJgAAAAAAAAB8MdcBAKAsPQ0AaQ==
+  </data>
+ </layer>
+ <layer name="weaponboard" width="40" height="60">
+  <data encoding="base64" compression="zlib">
+   eJztzkERAAAIA6DVtX8BS+z0AwlIAAAAAAAAALgy3wEAoGoBXukAag==
+  </data>
+ </layer>
+ <layer name="weapon1" width="40" height="60">
+  <data encoding="base64" compression="zlib">
+   eJztzkERAAAMAiDzrn+ApfD8QAISAAAAAAAAAJpuHQAAah5rvQBr
+  </data>
+ </layer>
+ <layer name="end_wall2" width="40" height="60">
+  <data encoding="base64" compression="zlib">
+   eJztxjENAAAIwDDMgn8JIIEPjjZZsggAAAAAAAAAAK7lVI8e2GkpNwmF
+  </data>
+ </layer>
+ <layer name="carpet" width="40" height="60">
+  <data encoding="base64" compression="zlib">
+   eJztzjEBAAAIA6BVsH9ZM+zSAxKQAABAZ64DAAAAAAAA8MQC9IsAEg==
+  </data>
+ </layer>
+ <layer name="floor_edge" width="40" height="60">
+  <data encoding="base64" compression="zlib">
+   eJztwwENAAAIA6B3sH9Xa9wJGwnAb1MWAAAAAAAAALhjATAiAq0=
+  </data>
+ </layer>
+ <layer name="entrance" width="40" height="60">
+  <data encoding="base64" compression="zlib">
+   eJztzgENAAAIA6BXs38pY3xOSEACAADAVdMOAAAAAADAcwsohgBC
+  </data>
+ </layer>
+ <layer name="steps" width="40" height="60">
+  <data encoding="base64" compression="zlib">
+   eJztzrEJADAMwLDc1v+P6trdBDpI4N0zAAAAsOc8/chf46/x1/hr/DX+Gn+Nv8Zf46/x1/hr/AHAngstARTj
+  </data>
+ </layer>
+ <layer name="edge1" width="40" height="60">
+  <data encoding="base64" compression="zlib">
+   eJzt1jEOwkAUA9HcjLn/qRAdQjgW1VhoX+VRUvxyr+v4dw/7gC/eb8I64gZhryDsFYS9grBXEPYKwl5B2CsIewVhryDsFYS9grBXEPYKwl5B2CsIewVhryDsl8/3vvH+54dvd/8aKG2jtI3SNkrbKG2jtI3SNkrbKG2jtI3SNkrbKG2jtI3SNkrbKG2jtI3SNkrbKG2jtI3SNkrbKG2j9HEcx3GsewJ5Ohf9
+  </data>
+ </layer>
+ <layer name="bullet_information" width="40" height="60">
+  <data encoding="base64" compression="zlib">
+   eJztzjEBAAAIA6BltX8IM+zSAxKQAAAAAAAAAPDFXAcAgMoCG6UAYw==
+  </data>
+ </layer>
+ <layer name="black_door" width="40" height="60">
+  <data encoding="base64" compression="zlib">
+   eJztxzENAAAIA7CpwL9UTIyEo/2aANyaZwcAAAAAAAAAaFmOBwDH
+  </data>
+ </layer>
+ <layer name="ranger" width="40" height="60">
+  <data encoding="base64" compression="zlib">
+   eJztwTEBAAAAwqD1T20Hb6AAAAAAAAAAAAB4DCWAAAE=
+  </data>
+ </layer>
+ <layer name="sofa" width="40" height="60">
+  <data encoding="base64" compression="zlib">
+   eJztzgENAAAIA6B3s38nY3xTSEACwEfTDgAAAAAAAADAAQtkeABE
+  </data>
+ </layer>
+ <layer name="start_door" width="40" height="60">
+  <data encoding="base64" compression="zlib">
+   eJztzjEBAAAIA6CVsH9VE+zWAxKQAPw21wEAAAAAAAAAgGIB11YAFg==
+  </data>
+ </layer>
+ <layer name="picture" width="40" height="60">
+  <data encoding="base64" compression="zlib">
+   eJztzjEBAAAIA6DlsH9QC+zXAxKQAHRzHQAAAAAAAAAAeG4BiW0AGw==
+  </data>
+ </layer>
+ <layer name="box1" width="40" height="60">
+  <data encoding="base64" compression="zlib">
+   eJztzjEBAAAIAyBjaP+iRvCcBySgCoCETgeA9yYdAAAAAAAAAE4L3eMAMg==
+  </data>
+ </layer>
+ <layer name="refrigerator" width="40" height="60">
+  <data encoding="base64" compression="zlib">
+   eJztzkERAAAIA6C1sH9TS+z0AwlIALg03wEAAAAAAAAAoGYBBmUAGA==
+  </data>
+ </layer>
+ <layer name="box" width="40" height="60">
+  <data encoding="base64" compression="zlib">
+   eJztzjEBAAAMAiBDrH/WdfDxgQQkALRuHQAAAAAAAAAAph6qTgAV
+  </data>
+ </layer>
+ <layer name="niudan" width="40" height="60">
+  <data encoding="base64" compression="zlib">
+   eJztzgENAAAIA6BnsH9YY3xTSEACwDXTDgAAAAAAAADAEwtfJgAT
+  </data>
+ </layer>
+ <layer name="end_wall1" width="40" height="60">
+  <data encoding="base64" compression="zlib">
+   eJzt0LENAEAIAzGGZf8ZGOGLLwiSXaU8pQoAAAAAAAAA6O2AB31/LvUl7fTfIMEATRUHCQ==
+  </data>
+ </layer>
+ <layer name="meta" width="40" height="60">
+  <data encoding="base64" compression="zlib">
+   eJzt2G0KhSAQRmEX5/7XFP0IRFJG3xFHPA8IEX2cblHdUgKwWq7GTepjnxmtbSr7KtdRj8uyTL3P3rqefZZlRq9Lj76V6NN493nf/27r80afhj7NCX25mI6m7uvdvzzev7ze29LP/Gi/L30a+jT0aejT0KehT0Ofhj4NffN6/z8iOLEvNebtQJ+GvjHW7wq7vm1EOW+fyM+GF32a1rMr0gBg8wC0sUZl
+  </data>
+ </layer>
+ <layer name="weapon_information" width="40" height="60">
+  <data encoding="base64" compression="zlib">
+   eJztziEBAAAMAjD6vr9/BwxmS7AEAAAAAAAAWLp1AACA2gM+AABs
+  </data>
+ </layer>
+ <objectgroup name="objects_knight">
+  <object id="1" name="knight" x="878" y="352" width="40" height="43"/>
+ </objectgroup>
+ <objectgroup name="startgame">
+  <object id="2" name="start" x="612" y="161" width="56" height="26"/>
+ </objectgroup>
+ <objectgroup name="information">
+  <object id="4" name="weapon1" x="502" y="1386" width="56" height="48"/>
+ </objectgroup>
+ <layer name="information_door" width="40" height="60">
+  <data encoding="base64" compression="zlib">
+   eJztzkERAAAIA6DFs38iS+z0AwlIAAAAAAAAAODefAcAoGABEB4ASQ==
+  </data>
+ </layer>
+</map>

@@ -1,6 +1,7 @@
 #include "SimpleMoveController.h"
 #include <map>
-#include "safetymapScene.h"
+#include "adventuremapScene.h"
+#include "myScene.h"
 
 bool SimpleMoveController::init()
 {
@@ -50,13 +51,19 @@ void SimpleMoveController::set_iyspeed(int ispeed)
 //键盘控制实现
 
 /*伪代码
-
 */
 void SimpleMoveController::registeKeyBoardEvent()
 {
 	auto keyBoardListener = EventListenerKeyboard::create();
 	keyBoardListener->onKeyPressed = [&](EventKeyboard::KeyCode keyCode, Event* event) {
 		switch (keyCode) {
+		case EventKeyboard::KeyCode::KEY_L://技能键
+		{
+			m_player->activateSkill();
+			m_player->skill();
+			break;
+		}
+
 		case EventKeyboard::KeyCode::KEY_J://开火键
 		{
 			if (m_player->getLockedTarget() == NULL ||
@@ -89,14 +96,19 @@ void SimpleMoveController::registeKeyBoardEvent()
 				if (target != NULL) {
 					m_player->setLockedTarget(target);
 					Vec2 pos = m_player->getLockedTarget()->getPosition();
-					m_player->rotateWeapon(pos);
 					m_player->attack(m_scene, pos);
 				}
 
 				//如果没找到锁定的目标，就向前方开火
 				else {
 					m_player->resetWeaponPos();
-					m_player->attack(m_scene, Vec2(m_player->getPositionX() + 1, m_player->getPositionY()));
+					if (m_player->getCurrentWeapon()->isFlippedX() == false) {
+						m_player->attack(m_scene, Vec2(m_player->getPositionX() + 1, m_player->getPositionY()));
+					}
+					else {
+						m_player->attack(m_scene, Vec2(m_player->getPositionX() - 1, m_player->getPositionY()));
+
+					}
 				}
 			}
 
@@ -104,7 +116,6 @@ void SimpleMoveController::registeKeyBoardEvent()
 			else {
 				//直接攻击该目标
 				Vec2 pos = m_player->getLockedTarget()->getPosition();
-				m_player->rotateWeapon(pos);
 				m_player->attack(m_scene, pos);
 			}
 			break;
@@ -155,10 +166,20 @@ void SimpleMoveController::registeKeyBoardEvent()
 		}
 		case EventKeyboard::KeyCode::KEY_A://左方向键;
 		{
+			//人物面向左边时，翻转武器
+			auto weaponBag = m_player->getWeaponBag();
+			for (auto weapon : weaponBag) {
+				weapon->setFlippedX(true);
+				weapon->setRotation(0.0f);
+				Size size = m_player->getSprite()->getContentSize();
+				float coefX = 1 - m_player->getWpPos().x;
+				float coefY = m_player->getWpPos().y;
+				weapon->setPosition(Vec2(0, size.height*coefY));
+			}
+
 			set_ixspeed(-2);
 			key_a = true;
 			m_player->getSprite()->stopAllActions();
-
 			knight_animate = Animation::create();
 			char nameSize[30] = { 0 };
 			for (int i = 1; i <= 4; i++)
@@ -217,6 +238,19 @@ void SimpleMoveController::registeKeyBoardEvent()
 		}
 		case EventKeyboard::KeyCode::KEY_D://右方向键;
 		{
+			//人物面向右边时，武器不翻转
+			auto weaponBag = m_player->getWeaponBag();
+			for (auto weapon : weaponBag) {
+				weapon->setFlippedX(false);
+				weapon->setRotation(0.0f);
+
+				Size size = m_player->getSprite()->getContentSize();
+				float coefX = m_player->getWpPos().x;
+				float coefY = m_player->getWpPos().y;
+				weapon->setPosition(Vec2(size.width*coefX, size.height*coefY));
+
+			}
+
 			key_d = true;
 			m_player->getSprite()->stopAllActions();
 			knight_animate = Animation::create();
@@ -385,8 +419,18 @@ void SimpleMoveController::bind_player(Player* player)
 	m_player = player;
 }
 
-void SimpleMoveController::bind_scene(safetymap* scene)
+void SimpleMoveController::bind_scene(myScene* scene)
 {
 	m_scene = scene;
 }
+
+/*void SimpleMoveController::bind_scene(adventuremap* scene)
+{
+	m_scene = scene;
+}
+
+/*void SimpleMoveController::bind_scene(safetymap* scene) {
+	m_scene = adventuremap::create(scene);
+}*/
+
 

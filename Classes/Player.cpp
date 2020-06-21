@@ -1,5 +1,6 @@
 #include "Player.h"
 #include "safetymapScene.h"
+#include "startmapScene.h"
 
 Player::Player()
 {
@@ -81,10 +82,21 @@ bool Player::bindWeapon(Weapon* weapon) {
 }
 
 void Player::attack(Scene* currentScene,const Vec2& pos) {
-	if (_MP - _currentWeapon->getMpConsume() >= 0) {
-		_MP -= _currentWeapon->getMpConsume();
-		this->_currentWeapon->fire(currentScene, pos, this);
-		log("player pos:(%f,%f)", this->getPositionX(), this->getPositionY());
+	if (_usingSkill == false) {
+		if (_MP - _currentWeapon->getMpConsume() >= 0) {
+			_MP -= _currentWeapon->getMpConsume();
+			this->_currentWeapon->fire(currentScene, pos, this);
+			log("player pos:(%f,%f)", this->getPositionX(), this->getPositionY());
+		}
+	}
+	else {
+		for (auto weapon : _weaponBag) {
+			if (_MP - weapon->getMpConsume() >= 0) {
+				_MP -= weapon->getMpConsume();
+				weapon->fire(currentScene, pos, this);
+			}
+		}
+		
 	}
 }
 
@@ -114,7 +126,15 @@ void Player::switchWeapon() {
 	}
 	_currentWeapon->setVisible(true);
 }
-
+void Player::activateSkill() {
+	if (_usingSkill == false)
+	{
+		_usingSkill = true;
+	}
+	else {
+		_usingSkill = false;
+	}
+}
 void Player::skill() {
 
 }
@@ -140,7 +160,7 @@ void Player::die()
 {
 
 	this->setVisible(false);
-	
+	Director::getInstance()->replaceScene(startmap::createScene());
 }
 
 //和键盘控制相关的函数
