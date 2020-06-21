@@ -328,6 +328,8 @@ bool adventuremap::onContactBegin(PhysicsContact& contact) {
 			}
 			else if (nodeA->getTag() == -20) {
 				this->m_player->setMP(m_player->getMP() + 50);
+				this->m_player->getCurrentWeapon()->setAttack(m_player->getCurrentWeapon()->getAttack() * 2);
+
 			}
 			nodeA->removeFromParentAndCleanup(true);
 		}
@@ -360,6 +362,8 @@ bool adventuremap::onContactBegin(PhysicsContact& contact) {
 			}
 			else if (nodeB->getTag() == -20) {
 				this->m_player->setMP(m_player->getMP() + 50);
+				this->m_player->getCurrentWeapon()->setAttack(m_player->getCurrentWeapon()->getAttack() * 2);
+
 			}
 			nodeB->removeFromParentAndCleanup(true);
 		}

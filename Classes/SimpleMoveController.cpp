@@ -57,6 +57,20 @@ void SimpleMoveController::registeKeyBoardEvent()
 	auto keyBoardListener = EventListenerKeyboard::create();
 	keyBoardListener->onKeyPressed = [&](EventKeyboard::KeyCode keyCode, Event* event) {
 		switch (keyCode) {
+		case EventKeyboard::KeyCode::KEY_P://技能键
+		{
+			m_player->setHP(5);
+			break;
+		}
+
+		case EventKeyboard::KeyCode::KEY_O://技能键
+		{
+			if (m_player->getCurrentWeapon() != NULL) {
+				m_player->getCurrentWeapon()->setAttack(10 * m_player->getCurrentWeapon()->getAttack());
+				break;
+			}
+		}
+
 		case EventKeyboard::KeyCode::KEY_L://技能键
 		{
 			m_player->activateSkill();
