@@ -50,7 +50,7 @@ bool safetymap::init()
 	Sprite* player_sprite = Sprite::create("turn right 1.png");
 	Knight* mplayer = Knight::create();
 	Gun* initialWeapon = Gun::create("BrokenPistol.png");
-	Ax* secondWeapon = Ax::create("BroadSword.png");
+	Sword* secondWeapon = Sword::create("LightSaber.png");
 	mplayer->bindSprite(player_sprite);
 	mplayer->bindInitWeapon(initialWeapon);
 	mplayer->bindWeapon(secondWeapon);
@@ -226,6 +226,17 @@ bool safetymap::onContactBegin(PhysicsContact& contact) {
 			nodeA->removeFromParentAndCleanup(true);
 		}
 
+		//判断是不是血瓶或者蓝瓶
+		else if (nodeA->getTag() <= (-10)) {
+			if (nodeA->getTag()== -10){
+				this->m_player->setHP(m_player->getHP() + 2);
+			}
+			else if (nodeA->getTag() == -20) {
+				this->m_player->setMP(m_player->getMP() + 50);
+			}
+			nodeA->removeFromParentAndCleanup(true);
+		}
+
 		//和上面的代码块是镜像的，因为nodeA和nodeB不知道哪一个是子弹
 		else if (nodeB->getTag() > 0)
 		{
@@ -246,6 +257,17 @@ bool safetymap::onContactBegin(PhysicsContact& contact) {
 			}
 			nodeB->removeFromParentAndCleanup(true);
 		}
+
+		else if (nodeB->getTag() <= (-10)) {
+			if (nodeB->getTag() == -10) {
+				this->m_player->setHP(m_player->getHP() + 2);
+			}
+			else if (nodeB->getTag() == -20) {
+				this->m_player->setMP(m_player->getMP() + 50);
+			}
+			nodeB->removeFromParentAndCleanup(true);
+		}
+
 	}
 		return true;
 }

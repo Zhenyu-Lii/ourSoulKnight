@@ -1,5 +1,6 @@
 #include "Player.h"
 #include "safetymapScene.h"
+#include "startmapScene.h"
 
 Player::Player()
 {
@@ -159,7 +160,7 @@ void Player::die()
 {
 
 	this->setVisible(false);
-	
+	Director::getInstance()->replaceScene(startmap::createScene());
 }
 
 //和键盘控制相关的函数
