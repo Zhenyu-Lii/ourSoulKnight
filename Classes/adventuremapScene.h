@@ -3,9 +3,10 @@
 
 #include "cocos2d.h"
 #include  "allHeadFiles.h"
+#include "myScene.h"
 using namespace cocos2d;
 
-class  adventuremap : public Scene
+class  adventuremap : public myScene
 {
 public:
 	static cocos2d::Scene* createScene();
@@ -13,7 +14,7 @@ public:
 	CREATE_FUNC(adventuremap);
 	void scheduleBlood(float delta);
 	virtual void update(float dt);
-	RemoteSoldierManager* m_remoteSoldierManager;
+	//RemoteSoldierManager* m_remoteSoldierManager;
 
 private:
 	TMXTiledMap *_tiledmap;									//地图类中相关地图

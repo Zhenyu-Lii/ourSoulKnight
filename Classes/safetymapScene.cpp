@@ -137,8 +137,8 @@ bool safetymap::init()
 
 	Sprite* player_sprite = Sprite::create("turn right 1.png");
 
-  //mplayer = Knight::create();
-	Knight* mplayer = Knight::create();
+	mplayer = Knight::create();
+	//Knight* mplayer = Knight::create();
 	Gun* initialWeapon = Gun::create("BrokenPistol.png");
 	Sword* secondWeapon = Sword::create("LightSaber.png");
 
@@ -435,7 +435,7 @@ void safetymap::scheduleBlood(float delta)
 
 void safetymap::update(float dt)
 {
-	auto player_x = this->mplayer->getPositionX();
+	auto player_x = this->m_player->getPositionX();
 	auto player_y = this->m_player->getPositionY();
 	int x = player_x * 1.8 / 32;
 	int y = (2560 - player_y * 1.8) / 32;

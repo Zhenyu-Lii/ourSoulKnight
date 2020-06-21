@@ -1,6 +1,7 @@
 #include "SimpleMoveController.h"
 #include <map>
-#include "safetymapScene.h"
+#include "adventuremapScene.h"
+#include "myScene.h"
 
 bool SimpleMoveController::init()
 {
@@ -418,8 +419,18 @@ void SimpleMoveController::bind_player(Player* player)
 	m_player = player;
 }
 
-void SimpleMoveController::bind_scene(safetymap* scene)
+void SimpleMoveController::bind_scene(myScene* scene)
 {
 	m_scene = scene;
 }
+
+/*void SimpleMoveController::bind_scene(adventuremap* scene)
+{
+	m_scene = scene;
+}
+
+/*void SimpleMoveController::bind_scene(safetymap* scene) {
+	m_scene = adventuremap::create(scene);
+}*/
+
 

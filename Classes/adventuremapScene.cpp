@@ -201,6 +201,8 @@ bool adventuremap::init()
 	//设置控制器到主角身上
 	mplayer->set_controller(simple_move_controller);
 	simple_move_controller->bind_player(mplayer);
+	simple_move_controller->bind_scene(this);
+
 
 	//设置碰撞掩码
 	this->m_player = mplayer;
