@@ -1,22 +1,22 @@
-#include "Sword.h"
+#include "Ax.h"
 
 
-Sword::Sword() {
+Ax::Ax() {
 	//基本属性
-	_attack = 6;
+	_attack = 10;
 	_mpConsumption = 0;
-	_attackRadius = 20;
+	_attackRadius = 14;
 	_bulletSpeed = 300;
 	_bulletType = PISTOLBULLET;
 
 }
 
-Sword::~Sword() {
+Ax::~Ax() {
 
 }
 
-Sword* Sword::create(const std::string& filename) {
-	Sword* sprite = new Sword;
+Ax* Ax::create(const std::string& filename) {
+	Ax* sprite = new Ax;
 	if (sprite && sprite->init(filename)) {
 		sprite->autorelease();
 		return sprite;
@@ -25,11 +25,11 @@ Sword* Sword::create(const std::string& filename) {
 	return nullptr;
 }
 
-bool Sword::init(const std::string& filename) {
+bool Ax::init(const std::string& filename) {
 	if (!Sprite::initWithFile(filename)) {
 		return false;
 	}
-	this->setRotation(0.0f);
+	this->setRotation(-50.0f);
 	this->setScale(0.08);
 	this->setAnchorPoint(Vec2(0.1, 0.5));
 	this->setTag(_attack);
@@ -47,7 +47,7 @@ bool Sword::init(const std::string& filename) {
 	return true;
 }
 
-void Sword::fire(Scene* _currentScene, const Vec2& pos, Entity* player) {
+void Ax::fire(Scene* _currentScene, const Vec2& pos, Entity* player) {
 	//this->getPhysicsBody()->setCategoryBitmask(0x04);
 	//this->getPhysicsBody()->setContactTestBitmask(0x02);
 	auto direction = pos - this->getParent()->getPosition();
@@ -55,32 +55,24 @@ void Sword::fire(Scene* _currentScene, const Vec2& pos, Entity* player) {
 
 	//创建近战武器攻击范围
 	auto bullet = Bullet::create(_bulletType, this, direction, _currentScene);
-	bullet->setScale(0.4);
+	bullet->setScale(1.5);
 
 	//调整近战武器攻击范围
-	bullet->setAnchorPoint(Vec2(0.6, 0.6));
-	bullet->setRotation(0.0f);
-	bullet->setVisible(true);
+	bullet->setAnchorPoint(Vec2(0.4, 0.5));
+	bullet->setRotation(90.0f);
+	bullet->setVisible(false);
 
 	//修正近战武器攻击范围的初始位置
 	Vec2 bulletPosition = this->getParent()->getPosition();
-	bulletPosition.x += 10;
-	bulletPosition.y -= 7.5;
+	bulletPosition.x;
+	bulletPosition.y;
 	bullet->setPosition(bulletPosition);
 
 	player->getCurrentMap()->addChild(bullet);
 	bullet->new_move();
-	
-	//武器动作要修改一下，改成向前突刺
-	auto attackMovement = MoveBy::create(0.1f,direction*_attackRadius);
-	auto resetMove = MoveBy::create(0.1f, -direction*_attackRadius);
+
+	auto attackMovement = RotateBy::create(0.1f, 360.0f);
+	auto resetMove = RotateTo::create(0.05f, -50.0f);
 	this->runAction(Sequence::create(attackMovement, resetMove, NULL));
-
-	//角色突进动作
-	auto rush = MoveBy::create(0.2f, direction * 30);
-	this->getParent()->runAction(rush);
-
-	//this->getPhysicsBody()->setCategoryBitmask(0x00);
-	//this->getPhysicsBody()->setContactTestBitmask(0x00);
 	
 }
