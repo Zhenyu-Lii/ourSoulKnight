@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="64" height="36" tilewidth="32" tileheight="32" nextobjectid="2">
+ <tileset firstgid="1" name="background" tilewidth="32" tileheight="32" tilecount="12" columns="3">
+  <image source="地面1.png" width="96" height="128"/>
+ </tileset>
+ <tileset firstgid="13" name="ground1" tilewidth="32" tileheight="32" tilecount="2" columns="8">
+  <image source="小场景.png" width="279" height="147"/>
+ </tileset>
+ <tileset firstgid="18" name="ground2" tilewidth="32" tileheight="32" tilecount="10" columns="3">
+  <image source="起伏.png" width="96" height="128"/>
+ </tileset>
+ <tileset firstgid="30" name="ground3" tilewidth="32" tileheight="32" tilecount="256" columns="16">
+  <image source="flower.png" width="512" height="512"/>
+ </tileset>
+ <layer name="地面" width="64" height="36">
+  <data encoding="base64" compression="zlib">
+   eJztmM0OgzAMg1u0Dfbz/s+7HIbUA10TGlQHfPgkpCWd7RxImVJKEyGEkKFkAA034S48nOpavhA8l8zCIjw76vZ4GplD+d8v4S18Gj3aOoIz5xGasvH80fnkyrOHT83vo/0jzyaK5yvmFJ3lh8dZ625UotmTEPzXsJw1b/S39ilk79Ycovm3ZtDKI6L/PfmcZf7e76to/r2zWO9GJdp7EuLusKXJqhPRV6/WWp2mv6cXhUhaj5i39b53tbysfSj59H6vOCqfMxHNazS9hBBCyD++eFEUKg==
+  </data>
+ </layer>
+ <objectgroup name="knight">
+  <object id="1" name="PlayerPoint" x="77" y="549" width="45" height="40"/>
+ </objectgroup>
+ <layer name="装饰" width="64" height="36">
+  <data encoding="base64" compression="zlib">
+   eJzt07ENACAIBEA2MO6/rL2xoIIY7mqK5wkRAAAAvKzuAAWyO2bmJvR1290BCky8K0zgt/N0BQAAwA8Oop8Aew==
+  </data>
+ </layer>
+ <layer name="起伏" width="64" height="36">
+  <data encoding="base64" compression="zlib">
+   eJzt1ksKgDAQg+GeoeBb739N41ZwVTAw+T8IdJkWpkxrAAAAmbq7AGA2MgOV56fy3TBuUmZlcRcxWZVN2d1FTA7lVC53EfyCec+e9+T7P7tQxf/uveOx82XqH+dkvAMAAEAdNxZhAsI=
+  </data>
+ </layer>
+ <layer name="花" width="64" height="36">
+  <data encoding="base64" compression="zlib">
+   eJzt1LENgDAMRcFMx2yM6VHo06QJ+QjftW6eJctjAAAA3VU6AA66FvP7SMX3VTrgZas7gL+af1znn9d591mlA8IqHQAAALDBA56EBi0=
+  </data>
+ </layer>
+</map>

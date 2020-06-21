@@ -50,7 +50,6 @@ void SimpleMoveController::set_iyspeed(int ispeed)
 //键盘控制实现
 
 /*伪代码
-
 */
 void SimpleMoveController::registeKeyBoardEvent()
 {

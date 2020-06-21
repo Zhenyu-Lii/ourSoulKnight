@@ -12,6 +12,9 @@ public:
 	CREATE_FUNC(Knight);
 	virtual bool init();
 	virtual void skill();//¼¼ÄÜ
+	int get_HP(){ return _HP; }
+	int  get_AC() { return _AC; }
+	int get_MP() { return _MP; }
 };
 
 #endif
