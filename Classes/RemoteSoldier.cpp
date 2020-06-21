@@ -116,17 +116,17 @@ void RemoteSoldier::die()
 	if(random > 50 && random % 2 == 0)
 	{
 		Items* item = Items::create(REDBOTTLE);
-		item->setTag(-10);
 		item->setPosition(this->getPosition());
 		this->getParent()->getParent()->addChild(item);
+		log("%f,%f,%f,%f", this->getPositionX(), this->getPositionY(), item->getPositionX(), item->getPositionY());
 		//_currentScene->addChild(item);
 	}
 	else if(random > 50 && random % 2 != 0)
 	{
 		Items* item = Items::create(BLUEBOTTLE);
-		item->setTag(-20);
 		item->setPosition(this->getPosition());
 		this->getParent()->getParent()->addChild(item);
+		log("%f,%f,%f,%f", this->getPositionX(), this->getPositionY(), item->getPositionX(), item->getPositionY());
 		//_currentScene->addChild(item);
 	}
 	this->setVisible(false);

@@ -7,6 +7,7 @@ Player::Player()
 	_HP = 5;
 	_MP = 100;
 	_AC = 5;
+	_currentWeapon = NULL;
 	_alreadyDead = false;
 	_lockedTarget = NULL;
 }
@@ -117,14 +118,16 @@ void Player::resetWeaponPos() {
 }
 
 void Player::switchWeapon() {
-	_currentWeapon->setVisible(false);
-	for (auto weapon : _weaponBag) {
-		if (_currentWeapon != weapon) {
-			_currentWeapon = weapon;
-			break;
+	if (_currentWeapon != NULL) {
+		_currentWeapon->setVisible(false);
+		for (auto weapon : _weaponBag) {
+			if (_currentWeapon != weapon) {
+				_currentWeapon = weapon;
+				break;
+			}
 		}
+		_currentWeapon->setVisible(true);
 	}
-	_currentWeapon->setVisible(true);
 }
 void Player::activateSkill() {
 	if (_usingSkill == false)

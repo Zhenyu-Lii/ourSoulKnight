@@ -19,7 +19,7 @@ bool Items::init(EItemsType ItemsType)
 		setTexture("RedBottle.png");
 		_itemName = "redBottle";
 		_effect = 2;
-
+		setTag(-10);
 		auto physicsBody = PhysicsBody::createBox(this->getContentSize(), PhysicsMaterial(0.0f, 0.0f, 0.0f));
 		physicsBody->setDynamic(false);
 		physicsBody->setCategoryBitmask(0x04);
@@ -33,13 +33,13 @@ bool Items::init(EItemsType ItemsType)
 		setTexture("BlueBottle.png");
 		_itemName = "blueBottle";
 		_effect = 50;
-
+		setTag(-20);
 		auto physicsBody = PhysicsBody::createBox(this->getContentSize(), PhysicsMaterial(0.0f, 0.0f, 0.0f));
 		physicsBody->setDynamic(false);
 		physicsBody->setCategoryBitmask(0x04);
 		physicsBody->setContactTestBitmask(0x01);
 		this->addComponent(physicsBody);
-
+	
 		return true;
 	}
 	else

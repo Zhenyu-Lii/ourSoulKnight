@@ -8,7 +8,7 @@ bool SimpleMoveController::init()
 	this->m_ixspeed = 0;
 	this->m_iyspeed = 0;
 
-
+	
 	registeKeyBoardEvent();//注册键盘控制事件
 	this->scheduleUpdate();
 
@@ -66,57 +66,59 @@ void SimpleMoveController::registeKeyBoardEvent()
 
 		case EventKeyboard::KeyCode::KEY_J://开火键
 		{
-			if (m_player->getLockedTarget() == NULL ||
-				m_player->getLockedTarget()->getalreadyDead()) {
+			if (m_scene != nullptr) {
+				if (m_player->getLockedTarget() == NULL ||
+					m_player->getLockedTarget()->getalreadyDead()) {
 
-				//新建一个target，用于指向最近的活的soldier
-				RemoteSoldier* target = NULL;
+					//新建一个target，用于指向最近的活的soldier
+					RemoteSoldier* target = NULL;
 
-				//遍历soldiermanager,找出最近的活的soldier
-				for (auto soldier : m_scene->m_remoteSoldierManager->getSoldierArr()) {
-					//如果是死的，跳过
-					if (soldier->getalreadyDead()) {
-						continue;
+					//遍历soldiermanager,找出最近的活的soldier
+					for (auto soldier : m_scene->m_remoteSoldierManager->getSoldierArr()) {
+						//如果是死的，跳过
+						if (soldier->getalreadyDead()) {
+							continue;
+						}
+
+						//这个soldier没死的话，计算出soldier和player的距离
+						Vec2 direction = soldier->getPosition() - m_player->getPosition();
+						float distance = sqrt(direction.x*direction.x + direction.y*direction.y);
+						static float minDistance = distance;
+
+						//如果当前soldier距离是最近的，那么把target设置为这个soldier
+						if (minDistance >= distance) {
+							target = soldier;
+						}
+
+						//如果都死完了，那么target不会变，一直是NULL
 					}
 
-					//这个soldier没死的话，计算出soldier和player的距离
-					Vec2 direction = soldier->getPosition() - m_player->getPosition();
-					float distance = sqrt(direction.x*direction.x + direction.y*direction.y);
-					static float minDistance = distance;
-
-					//如果当前soldier距离是最近的，那么把target设置为这个soldier
-					if (minDistance >= distance) {
-						target = soldier;
+					//如果找到了锁定目标，那么锁定并攻击
+					if (target != NULL) {
+						m_player->setLockedTarget(target);
+						Vec2 pos = m_player->getLockedTarget()->getPosition();
+						m_player->attack(m_scene, pos);
 					}
 
-					//如果都死完了，那么target不会变，一直是NULL
+					//如果没找到锁定的目标，就向前方开火
+					else {
+						m_player->resetWeaponPos();
+						if (m_player->getCurrentWeapon()->isFlippedX() == false) {
+							m_player->attack(m_scene, Vec2(m_player->getPositionX() + 1, m_player->getPositionY()));
+						}
+						else {
+							m_player->attack(m_scene, Vec2(m_player->getPositionX() - 1, m_player->getPositionY()));
+
+						}
+					}
 				}
 
-				//如果找到了锁定目标，那么锁定并攻击
-				if (target != NULL) {
-					m_player->setLockedTarget(target);
+				//上述情况的反面，就是有锁定目标且该目标是活着的
+				else {
+					//直接攻击该目标
 					Vec2 pos = m_player->getLockedTarget()->getPosition();
 					m_player->attack(m_scene, pos);
 				}
-
-				//如果没找到锁定的目标，就向前方开火
-				else {
-					m_player->resetWeaponPos();
-					if (m_player->getCurrentWeapon()->isFlippedX() == false) {
-						m_player->attack(m_scene, Vec2(m_player->getPositionX() + 1, m_player->getPositionY()));
-					}
-					else {
-						m_player->attack(m_scene, Vec2(m_player->getPositionX() - 1, m_player->getPositionY()));
-
-					}
-				}
-			}
-
-			//上述情况的反面，就是有锁定目标且该目标是活着的
-			else {
-				//直接攻击该目标
-				Vec2 pos = m_player->getLockedTarget()->getPosition();
-				m_player->attack(m_scene, pos);
 			}
 			break;
 		}

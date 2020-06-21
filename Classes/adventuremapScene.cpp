@@ -135,7 +135,7 @@ bool adventuremap::init()
 
 	Sprite* player_sprite = Sprite::create("turn right 1.png");
 	mplayer = Knight::create();
-	Sword* initialWeapon = Sword::create("BroadSword.png");
+	Ax* initialWeapon = Ax::create("BroadSword.png");
 	ShotGun* secondWeapon = ShotGun::create("GoblinShotGun.png");
 	mplayer->bindSprite(player_sprite);
 	mplayer->bindInitWeapon(initialWeapon);
@@ -308,7 +308,7 @@ bool adventuremap::onContactBegin(PhysicsContact& contact) {
 			else if (nodeB->getTag() == -2)
 			{
 				//this->m_monster->takeDamage(nodeA->getTag());
-				//找出是哪个怪物和子弹发生了碰撞
+				//鎵惧嚭鏄摢涓�墿鍜屽瓙寮瑰彂鐢熶簡纰版挒
 				for (auto Soldier : this->m_remoteSoldierManager->getSoldierArr())
 				{
 					if (nodeB->getMonsterID() == Soldier->getMonsterID())
@@ -320,7 +320,20 @@ bool adventuremap::onContactBegin(PhysicsContact& contact) {
 			nodeA->removeFromParentAndCleanup(true);
 		}
 
+
+		//判断是不是血瓶或者蓝瓶
+		else if (nodeA->getTag() <= (-10)) {
+			if (nodeA->getTag() == -10) {
+				this->m_player->setHP(m_player->getHP() + 2);
+			}
+			else if (nodeA->getTag() == -20) {
+				this->m_player->setMP(m_player->getMP() + 50);
+			}
+			nodeA->removeFromParentAndCleanup(true);
+		}
+
 		//和上面的代码块是镜像的，因为nodeA和nodeB不知道哪一个是子弹
+
 		else if (nodeB->getTag() > 0)
 		{
 			if (nodeA->getTag() == -1)
@@ -340,6 +353,17 @@ bool adventuremap::onContactBegin(PhysicsContact& contact) {
 			}
 			nodeB->removeFromParentAndCleanup(true);
 		}
+
+		else if (nodeB->getTag() <= (-10)) {
+			if (nodeB->getTag() == -10) {
+				this->m_player->setHP(m_player->getHP() + 2);
+			}
+			else if (nodeB->getTag() == -20) {
+				this->m_player->setMP(m_player->getMP() + 50);
+			}
+			nodeB->removeFromParentAndCleanup(true);
+		}
+
 	}
 	return true;
 }
