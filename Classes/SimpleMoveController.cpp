@@ -89,7 +89,6 @@ void SimpleMoveController::registeKeyBoardEvent()
 				if (target != NULL) {
 					m_player->setLockedTarget(target);
 					Vec2 pos = m_player->getLockedTarget()->getPosition();
-					m_player->rotateWeapon(pos);
 					m_player->attack(m_scene, pos);
 				}
 
@@ -104,7 +103,6 @@ void SimpleMoveController::registeKeyBoardEvent()
 			else {
 				//直接攻击该目标
 				Vec2 pos = m_player->getLockedTarget()->getPosition();
-				m_player->rotateWeapon(pos);
 				m_player->attack(m_scene, pos);
 			}
 			break;

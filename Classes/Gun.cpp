@@ -40,9 +40,11 @@ bool Gun::init(const std::string& filename)
 
 void Gun::fire(Scene* _currentScene, const Vec2& pos, Entity* player) {
 
-	//攻击方向
+	//设置武器攻击方向
 	auto direction = pos - this->getParent()->getPosition();
 	direction.normalize();
+	float temp = (-1)*(180 / PI)* atan(direction.y / direction.x);
+	this->setRotation(temp);
 
 	//创建子弹
 	auto bullet = Bullet::create(_bulletType, this, direction, _currentScene);

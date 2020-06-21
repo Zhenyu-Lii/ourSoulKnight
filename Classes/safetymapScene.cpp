@@ -49,7 +49,7 @@ bool safetymap::init()
 
 	Sprite* player_sprite = Sprite::create("turn right 1.png");
 	Knight* mplayer = Knight::create();
-	Sword* initialWeapon = Sword::create("BroadSword.png");
+	Sword* initialWeapon = Sword::create("LightSaber.png");
 	ShotGun* secondWeapon = ShotGun::create("GoblinShotGun.png");
 	mplayer->bindSprite(player_sprite);
 	mplayer->bindInitWeapon(initialWeapon);

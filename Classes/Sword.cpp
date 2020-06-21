@@ -5,7 +5,7 @@ Sword::Sword() {
 	//基本属性
 	_attack = 6;
 	_mpConsumption = 0;
-	_attackRadius = 20;
+	_attackRadius = 35;
 	_bulletSpeed = 300;
 	_bulletType = PISTOLBULLET;
 
@@ -30,7 +30,7 @@ bool Sword::init(const std::string& filename) {
 		return false;
 	}
 	this->setRotation(0.0f);
-	this->setScale(0.08);
+	this->setScale(0.13);
 	this->setAnchorPoint(Vec2(0.1, 0.5));
 	this->setTag(_attack);
 
@@ -52,6 +52,8 @@ void Sword::fire(Scene* _currentScene, const Vec2& pos, Entity* player) {
 	//this->getPhysicsBody()->setContactTestBitmask(0x02);
 	auto direction = pos - this->getParent()->getPosition();
 	direction.normalize();
+	float temp = (-1)*(180 / PI)* atan(direction.y / direction.x);
+	this->setRotation(temp);
 
 	//创建近战武器攻击范围
 	auto bullet = Bullet::create(_bulletType, this, direction, _currentScene);
@@ -60,25 +62,27 @@ void Sword::fire(Scene* _currentScene, const Vec2& pos, Entity* player) {
 	//调整近战武器攻击范围
 	bullet->setAnchorPoint(Vec2(0.6, 0.6));
 	bullet->setRotation(0.0f);
-	bullet->setVisible(true);
+	bullet->setVisible(false);
 
 	//修正近战武器攻击范围的初始位置
 	Vec2 bulletPosition = this->getParent()->getPosition();
-	bulletPosition.x += 10;
+	bulletPosition.x += 12;
 	bulletPosition.y -= 7.5;
 	bullet->setPosition(bulletPosition);
 
 	player->getCurrentMap()->addChild(bullet);
 	bullet->new_move();
 	
+	//角色突进动作
+	auto rush = MoveBy::create(0.2f, direction * _attackRadius);
+	this->getParent()->runAction(rush);
+
 	//武器动作要修改一下，改成向前突刺
-	auto attackMovement = MoveBy::create(0.1f,direction*_attackRadius);
-	auto resetMove = MoveBy::create(0.1f, -direction*_attackRadius);
+	auto attackMovement = MoveBy::create(0.1f, direction*_attackRadius / 3);
+	auto resetMove = MoveBy::create(0.1f, -direction * _attackRadius / 3);
 	this->runAction(Sequence::create(attackMovement, resetMove, NULL));
 
-	//角色突进动作
-	auto rush = MoveBy::create(0.2f, direction * 30);
-	this->getParent()->runAction(rush);
+	
 
 	//this->getPhysicsBody()->setCategoryBitmask(0x00);
 	//this->getPhysicsBody()->setContactTestBitmask(0x00);
