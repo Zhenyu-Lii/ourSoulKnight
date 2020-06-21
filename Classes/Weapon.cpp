@@ -1,6 +1,5 @@
 #include "Weapon.h"
 
-
 void Weapon::trackTouch() {
 
 }

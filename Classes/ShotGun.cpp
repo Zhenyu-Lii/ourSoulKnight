@@ -1,10 +1,11 @@
 #include "ShotGun.h"
 
 ShotGun::ShotGun() {
+	//基本属性
 	_attack = 2;
-	_attackMode = 1;
 	_mpConsumption = 2;
-	_bulletSpeed = 1000;
+	_attackRadius = 350;
+	_bulletSpeed = 180;
 	_bulletType = SHORTREMOTE;
 
 	//武器位置
@@ -36,20 +37,25 @@ bool ShotGun::init(const std::string& filename)
 }
 
 void ShotGun::fire(Scene* _currentScene, const Vec2& pos, Entity* player) {
+	
 	//攻击方向
 	auto direction = pos - this->getParent()->getPosition();
 	direction.normalize();
-
 	direction = reduceBy15Degree(reduceBy15Degree(direction));
+	
 	//创建子弹
 	for (int i = 0; i < 5; i++, direction = increaseBy15Degree(direction)) {
-		auto bullet1 = Bullet::create(_bulletType, this, direction, _currentScene);
-		bullet1->setScale(1.5);
-		bullet1->setPosition(this->getParent()->getPosition());
-		log("bullet pos:(%f, %f)", this->getParent()->getPositionX(), this->getParent()->getPositionY());
-		player->getCurrentMap()->addChild(bullet1);
-		bullet1->new_move();
-		//break;
+		auto bullet = Bullet::create(_bulletType, this, direction, _currentScene);
+		bullet->setScale(1.5);
+
+		//修正子弹初始位置
+		Vec2 bulletPosition = this->getParent()->getPosition();
+		bulletPosition.x += 10;
+		bulletPosition.y -= 12;
+		bullet->setPosition(bulletPosition);
+
+		player->getCurrentMap()->addChild(bullet);
+		bullet->new_move();
 	}
 	
 }

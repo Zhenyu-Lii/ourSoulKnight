@@ -7,6 +7,7 @@ Player::Player()
 	_MP = 100;
 	_AC = 5;
 	_alreadyDead = false;
+	_lockedTarget = NULL;
 }
 
 Player::~Player() {
@@ -32,7 +33,7 @@ bool Player::bindSprite(Sprite*sprite) {
 		this->setContentSize(size);
 		this->setAnchorPoint(Vec2(0.5, 0.5));
 
-		//添加物理碰撞模型
+		//����������ײģ��
 		auto physicsBody = PhysicsBody::createBox(size, PhysicsMaterial(0.0f, 0.0f, 0.0f));
 		physicsBody->setDynamic(false);
 		physicsBody->setCategoryBitmask(0x01);
@@ -42,38 +43,47 @@ bool Player::bindSprite(Sprite*sprite) {
 		return true;
 	}
 }
-//和角色武器相关的函数
-bool Player::bindWeapon(Weapon* weapon) {
-	if (weapon == nullptr)
-	{
-		printf("m_weapon in this player is nullptr, check wether the file used to create the weapon in right dictionary.");
+bool Player::bindInitWeapon(Weapon* weapon) {
+	if (weapon == nullptr) {
+		printf("_currentWeapon in this player is nullptr, check wether the file used to create the weapon in right dictionary.");
 		return false;
 	}
-	else
-	{
-		this->m_weaponArr.pushBack(weapon);
-		this->m_weapon = weapon;	//当前武器就设置为绑定的武�?
-		if (m_weapon == nullptr)
-		{
-			log("m_weapon is nullptr");
-		}
+	else {
+		_weaponBag.pushBack(weapon);
+		_currentWeapon = weapon;
+		_attack = _currentWeapon->getAttack();
 
-		//设定武器位置
+		//����������λ��
 		Size size = m_sprite->getContentSize();
-		m_weapon->setPosition(Vec2(size.width*getWpPos().x, size.height*getWpPos().y));//*getWpPos().x
-			//用于初次测试，之后删除，不同武器的缩放不同，要么把缩放放在创建函数里面，要么就把武器图片的大小调�?
+		_currentWeapon->setPosition(Vec2(size.width*getWpPos().x, size.height*getWpPos().y));
+		this->addChild(_currentWeapon);
 
-		this->addChild(m_weapon);
+		return true;
+	}
+}
 
-		_attack = m_weapon->getAttack();
+//和角色武器相关的函数
+bool Player::bindWeapon(Weapon* weapon) {
+	if (weapon == nullptr) {
+		printf("_currentWeapon in this player is nullptr, check wether the file used to create the weapon in right dictionary.");
+		return false;
+	}
+	else {
+		this->_weaponBag.pushBack(weapon);
+	
+		//����������λ��
+		Size size = m_sprite->getContentSize();
+		_weaponBag.back()->setPosition(Vec2(size.width*getWpPos().x, size.height*getWpPos().y));//*getWpPos().x
+		this->addChild(_weaponBag.back());
+		_weaponBag.back()->setVisible(false);
 		return true;
 	}
 }
 
 void Player::attack(Scene* currentScene,const Vec2& pos) {
-	if (_MP - m_weapon->getMpConsume() >= 0) {
-		_MP -= m_weapon->getMpConsume();
-		this->m_weapon->fire(currentScene, pos, this);
+	if (_MP - _currentWeapon->getMpConsume() >= 0) {
+		_MP -= _currentWeapon->getMpConsume();
+		this->_currentWeapon->fire(currentScene, pos, this);
 		log("player pos:(%f,%f)", this->getPositionX(), this->getPositionY());
 	}
 }
@@ -83,19 +93,26 @@ void Player::rotateWeapon(const Vec2& pos) {
 	float x = direction.x;
 	float y = direction.y;
 	if (x > 0 && y > 0) {
-		this->m_weapon->setRotation(-45.0f);
+		this->_currentWeapon->setRotation(-45.0f);
 	}
 	else if (x > 0 && y < 0) {
-		this->m_weapon->setRotation(+45.0f);
+		this->_currentWeapon->setRotation(+45.0f);
 	}
 }
 
 void Player::resetWeaponPos() {
-	this->m_weapon->setRotation(0.0f);
+	this->_currentWeapon->setRotation(0.0f);
 }
 
 void Player::switchWeapon() {
-
+	_currentWeapon->setVisible(false);
+	for (auto weapon : _weaponBag) {
+		if (_currentWeapon != weapon) {
+			_currentWeapon = weapon;
+			break;
+		}
+	}
+	_currentWeapon->setVisible(true);
 }
 
 void Player::skill() {

@@ -11,13 +11,16 @@ public:
 	static cocos2d::Scene* createScene();
 	virtual bool init();
 	CREATE_FUNC(safetymap);
+
+	RemoteSoldierManager* m_remoteSoldierManager;
+
 private:
 	TMXTiledMap *_tiledmap;									//地图类中相关地图
 	TMXLayer *_background;									//背景层
 	Sprite *_player;
 	Player* m_player;
-	RemoteSoldier* m_monster;										//先用player类替代
-	RemoteSoldierManager* m_remoteSoldierManager;
+	RemoteSoldier* m_monster;								//测试武器用的monster
+
 protected:
 	virtual bool onContactBegin(PhysicsContact& contact);	//碰撞后的回调
 	virtual bool onTouchBegin(Touch* touch, Event* event);	//点击鼠标后的回调

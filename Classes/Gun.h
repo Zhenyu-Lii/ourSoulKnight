@@ -8,7 +8,6 @@
 USING_NS_CC;
 
 class Gun :public Weapon {
-	CC_SYNTHESIZE(float, _bulletSpeed, BulletSpeed);			//子弹速度，单位是像素点
 	CC_SYNTHESIZE(EActorType, _bulletType, BulletType);			//武器使用的子弹类型，近战则没有
 
 public:

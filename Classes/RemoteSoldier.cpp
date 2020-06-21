@@ -78,6 +78,9 @@ void RemoteSoldier::attack(Entity* attackTarget)
 		auto bullet2 = Bullet::create(SHORTREMOTE, this, direction, _currentScene);
 		direction.rotate(Vec2(0, 0), -1.0);
 		auto bullet3 = Bullet::create(SHORTREMOTE, this, direction, _currentScene);
+		bullet1->setScale(1.5);
+		bullet2->setScale(1.5);
+		bullet3->setScale(1.5);
 		bullet1->setPosition(this->getPosition());
 		bullet2->setPosition(this->getPosition());
 		bullet3->setPosition(this->getPosition());

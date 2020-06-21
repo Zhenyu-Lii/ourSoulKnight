@@ -26,7 +26,9 @@ enum EActorType
 	LONGREMOTE,
 	NARROWMELEE,
 	WIDEMELLE,
-	PLAYER
+	PLAYER,
+	PISTOLBULLET
+	
 };
 enum EItemsType
 {

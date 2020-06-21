@@ -65,7 +65,7 @@ Bullet* Bullet::create(EActorType actorType, Weapon* attackSource, Vec2 attackDi
 	return nullptr;
 }
 
-bool Bullet::init(EActorType actorType, Weapon* attackSource, Vec2 attackDirection, Scene* currentScene)
+bool Bullet::init(EActorType actorType, Weapon* attackWeapon, Vec2 attackDirection, Scene* currentScene)
 {
 	if (actorType == SHORTREMOTE)
 	{
@@ -77,9 +77,15 @@ bool Bullet::init(EActorType actorType, Weapon* attackSource, Vec2 attackDirecti
 		_bulletType = "LongRemote";
 		setTexture("LongRemoteBullet.png");
 	}
+	else if (actorType == PISTOLBULLET)
+	{
+		_bulletType = "PISTOLBULLET";
+		setTexture("PistolBullet.png");
+	}
 	else
 		return false;
-	_damage = attackSource->getAttack();
+	_attackWeapon = attackWeapon;
+	_damage = attackWeapon->getAttack();
 	_attackDirection = attackDirection;
 	_currentScene = currentScene;
 
@@ -95,8 +101,14 @@ bool Bullet::init(EActorType actorType, Weapon* attackSource, Vec2 attackDirecti
 }
 void Bullet::new_move()
 {
+	Vec2 shoutAmount = _attackDirection * _attackWeapon->getattackRadius();
+	auto moveby = MoveBy::create(_attackWeapon->getattackRadius() / _attackWeapon->getbulletSpeed(), shoutAmount);
+	auto actionRemove = RemoveSelf::create();
+	this->runAction(Sequence::create(moveby, actionRemove, nullptr));
+	/*
 	Vec2 destination = _attackDirection * 2000;
 	auto moveby = MoveBy::create(2.0f, destination);
 	auto actionRemove = RemoveSelf::create();
 	this->runAction(Sequence::create(moveby, actionRemove, nullptr));
+	*/
 }

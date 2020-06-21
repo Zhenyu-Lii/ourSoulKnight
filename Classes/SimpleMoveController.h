@@ -6,6 +6,9 @@
 #include "Controller.h"
 using namespace cocos2d;
 
+class Player;
+class safetymap;
+
 class SimpleMoveController :public My_Controller
 {
 public:
@@ -17,12 +20,17 @@ public:
 	void set_ixspeed(int ispeed);
 	void set_iyspeed(int ispeed);
 	void bind_sprite(Sprite* sprite);
+	void bind_player(Player* player);
+	void bind_scene(safetymap* Scene);
+
 
 
 private:
 	int m_ixspeed;//x方向的移动速度
 	int m_iyspeed;//y方向的移动速度
 	Sprite* m_sprite;
+	Player* m_player;
+	safetymap* m_scene;
 	void registeKeyBoardEvent();
 	ValueMap   map;
 

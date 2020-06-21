@@ -49,9 +49,12 @@ bool safetymap::init()
 
 	Sprite* player_sprite = Sprite::create("turn right 1.png");
 	Knight* mplayer = Knight::create();
-	ShotGun* initialWeapon = ShotGun::create("goblin_guard_shotgun.png");
+	Gun* initialWeapon = Gun::create("BrokenPistol.png");
+	ShotGun* secondWeapon = ShotGun::create("GoblinShotGun.png");
 	mplayer->bindSprite(player_sprite);
-	mplayer->bindWeapon(initialWeapon);
+	mplayer->bindInitWeapon(initialWeapon);
+	mplayer->bindWeapon(secondWeapon);
+
 	mplayer->setTiledMap(_tiledmap);
 
 	
@@ -95,7 +98,8 @@ bool safetymap::init()
 
 	//璁剧疆鎺у埗鍣ㄥ埌涓昏韬笂
 	mplayer->set_controller(simple_move_controller);
-	simple_move_controller->bind_sprite(player_sprite);//Bind player
+	simple_move_controller->bind_player(mplayer);
+	simple_move_controller->bind_scene(this);
   
 	//璁剧疆纰版挒鎺╃爜
 	this->m_player = mplayer;
@@ -131,34 +135,60 @@ bool safetymap::init()
 }
 
 bool safetymap::onTouchBegin(Touch* touch, Event* event) {
-	/*if(!m_player->getLockedTarget()->getalreadyDead())){
+	/*
+		Vec2 pos = m_player->getLockedTarget()->getPosition();
+		m_player->rotateWeapon(pos);
+		m_player->attack(this, pos);
+	*/
+	//如果当前没有锁定的怪物，或者锁定的怪物已经死了
+	if (m_player->getLockedTarget() == NULL ||
+		m_player->getLockedTarget()->getalreadyDead()) {
+		
+		//新建一个target，用于指向最近的活的soldier
+		RemoteSoldier* target = NULL;
+		
+		//遍历soldiermanager,找出最近的活的soldier
+		for (auto soldier : this->m_remoteSoldierManager->getSoldierArr()){	
+			//如果是死的，跳过
+			if (soldier->getalreadyDead()) {
+				continue;
+			}
+
+			//这个soldier没死的话，计算出soldier和player的距离
+			Vec2 direction = soldier->getPosition() - m_player->getPosition();
+			float distance = sqrt(direction.x*direction.x + direction.y*direction.y);
+			static float minDistance = distance;
+
+			//如果当前soldier距离是最近的，那么把target设置为这个soldier
+			if (minDistance >= distance) {
+				target = soldier;
+			}
+
+			//如果都死完了，那么target不会变，一直是NULL
+		}
+
+		//如果找到了锁定目标，那么锁定并攻击
+		if (target != NULL) {
+			m_player->setLockedTarget(target);
+			Vec2 pos = m_player->getLockedTarget()->getPosition();
+			m_player->rotateWeapon(pos);
+			m_player->attack(this, pos);
+		}
+		
+		//如果没找到锁定的目标，就向前方开火
+		else {
+			m_player->resetWeaponPos();
+			m_player->attack(this, Vec2(m_player->getPositionX() + 1, m_player->getPositionY()));
+		}
+	}
+	
+	//上述情况的反面，就是有锁定目标且该目标是活着的
+	else {
+		//直接攻击该目标
 		Vec2 pos = m_player->getLockedTarget()->getPosition();
 		m_player->rotateWeapon(pos);
 		m_player->attack(this, pos);
 	}
-	else{
-		//找一个距离最近的soldier攻击
-		for (auto target : this->m_remoteSoldierManager->getSoldierArr()){
-			if (target->getalreadyDead()){
-				continue;
-			}
-			Vec2 direction = target->getPosition() - m_player->getPosition();
-			float distance = sqrt(direction.x*direction.x + direction.y*direction.y);
-
-			/*if(!target->getalreadyDead())
-			{
-				Vec2 pos = target->getPosition();
-				m_player->rotateWeapon(pos);
-				m_player->attack(this,pos);
-			}
-			else {
-				m_player->resetWeaponPos();
-				m_player->attack(this, Vec2(m_player->getPositionX() + 1, m_player->getPositionY()));
-			}
-		}
-	}*/
-	m_player->resetWeaponPos();
-	m_player->attack(this, Vec2(m_player->getPositionX() + 1, m_player->getPositionY()));
 	return true;
 }
 

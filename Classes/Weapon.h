@@ -7,8 +7,9 @@ USING_NS_CC;
 
 class Weapon :public Sprite {
 	CC_SYNTHESIZE(int, _attack, Attack);						//攻击力
+	CC_SYNTHESIZE(int, _attackRadius, attackRadius);			//攻击半径
 	CC_SYNTHESIZE(int, _mpConsumption, MpConsume);				//单次攻击能量消耗
-	CC_SYNTHESIZE(int, _attackMode, Mode);						//攻击模式(远程为0，近战为1)
+	CC_SYNTHESIZE(int, _bulletSpeed, bulletSpeed);
 
 public:
 	void hide();												//隐藏当前不使用的武器

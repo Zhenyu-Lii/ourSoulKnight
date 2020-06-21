@@ -14,6 +14,7 @@ class Player :public Entity {
 	CC_SYNTHESIZE(int, _AC, AC);
 	CC_SYNTHESIZE(Vec2, _weaponPosition, WpPos);				//武器固定在人物上的相对位�?默认值为player的中�?
 	CC_SYNTHESIZE(Weapon*, _currentWeapon, CurrentWeapon);
+	CC_SYNTHESIZE(Vector<Weapon*> , _weaponBag, WeaponBag);
 	CC_SYNTHESIZE(RemoteSoldier*, _lockedTarget, LockedTarget);
 
 public:
@@ -24,7 +25,9 @@ public:
 
 	//功能模块
 	bool bindSprite(Sprite* sprite);							//绑定精灵对象
-	bool bindWeapon(Weapon* Weapon);							//绑定武器
+	bool bindWeapon(Weapon* Weapon);							//�󶨺���������
+	bool bindInitWeapon(Weapon* Weapon);						//�󶨳�ʼ����
+
 	virtual void die();											//角色死亡，删除角色并返回安全地图
 	virtual void takeDamage(int damage);						//受击判定，并掉血
 	void attack(Scene* currentScene, const Vec2& pos);			//攻击函数
@@ -40,7 +43,6 @@ public:
 	void bind_scene(Scene* scene);
 private:
 	Weapon* m_weapon;											//Player当前使用的武�?
-	Vector<Weapon*> m_weaponArr;								//Player携带的所有武�?										
 	TMXLayer* meta;												//检测碰撞的地图�?
 	Point tileCoordForPosition(Point pos);						//将像素坐标转化为地图格子坐标
 };

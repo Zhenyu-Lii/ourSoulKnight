@@ -2,13 +2,17 @@
 #include <math.h>
 
 Gun::Gun() {
+	//基本属性
 	_attack = 2;
-	_attackMode = 1;
 	_mpConsumption = 0;
-	_bulletSpeed = 1000;
-	_bulletType = LONGREMOTE;
+	_attackRadius = 500;
+	_bulletSpeed = 280;
+	_bulletType = PISTOLBULLET;
+	
+	//武器位置
 	this->setAnchorPoint(Vec2(0.1, 0.1));
 }
+
 Gun::~Gun() {
 
 }
@@ -42,8 +46,14 @@ void Gun::fire(Scene* _currentScene, const Vec2& pos, Entity* player) {
 
 	//创建子弹
 	auto bullet = Bullet::create(_bulletType, this, direction, _currentScene);
-	bullet->setScale(1.5);
-	bullet->setPosition(this->getParent()->getPosition());
+	bullet->setScale(0.4);
+
+	//修正子弹初始位置
+	Vec2 bulletPosition = this->getParent()->getPosition();
+	bulletPosition.x += 10;
+	bulletPosition.y -= 7.5;
+	bullet->setPosition(bulletPosition);
+	
 	player->getCurrentMap()->addChild(bullet);
 	bullet->new_move();
 }
