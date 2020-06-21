@@ -37,19 +37,17 @@ bool ShotGun::init(const std::string& filename)
 }
 
 void ShotGun::fire(Scene* _currentScene, const Vec2& pos, Entity* player) {
-	player->getSprite()->setFlippedY(true);
-	this->setFlippedY(true);
 
 	//设置武器攻击方向
 	auto direction = pos - this->getParent()->getPosition();
 	direction.normalize();
-	if (direction.x >= 0) {
+	if (direction.x >= 0 && this->isFlippedX() == false) {
 		float temp = (-1)*(180 / PI)* atan(direction.y / direction.x);
 		this->setRotation(temp);
 	}
-	else if (direction.x < 0) {
-		//player->getSprite()->flip
-		//this->setFlippedY(true);
+	else if (direction.x < 0 && this->isFlippedX() == true) {
+		float temp = (180 / PI)* atan(direction.y / direction.x);
+		this->setRotation(temp);
 	}
 	
 
@@ -69,8 +67,7 @@ void ShotGun::fire(Scene* _currentScene, const Vec2& pos, Entity* player) {
 		player->getCurrentMap()->addChild(bullet);
 		bullet->new_move();
 	}
-	player->getSprite()->setFlippedY(false);
-	this->setFlippedY(false);
+	
 }
 
 //改变子弹方向，具体的角度改三角函数里的值计可

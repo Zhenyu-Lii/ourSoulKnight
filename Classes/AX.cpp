@@ -70,9 +70,17 @@ void Ax::fire(Scene* _currentScene, const Vec2& pos, Entity* player) {
 
 	player->getCurrentMap()->addChild(bullet);
 	bullet->new_move();
-
-	auto attackMovement = RotateBy::create(0.1f, 360.0f);
-	auto resetMove = RotateTo::create(0.05f, -50.0f);
-	this->runAction(Sequence::create(attackMovement, resetMove, NULL));
+	
+	if (this->isFlippedX() == false) {
+		auto attackMovement = RotateBy::create(0.1f, 360.0f);
+		auto resetMove = RotateTo::create(0.05f, -50.0f);
+		this->runAction(Sequence::create(attackMovement, resetMove, NULL));
+	}
+	else {
+		auto attackMovement = RotateBy::create(0.1f, -360.0f);
+		auto resetMove = RotateTo::create(0.05f, -50.0f);
+		this->runAction(Sequence::create(attackMovement, resetMove, NULL));
+	}
+	
 	
 }

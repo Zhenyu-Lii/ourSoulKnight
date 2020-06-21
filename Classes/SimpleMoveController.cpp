@@ -153,10 +153,20 @@ void SimpleMoveController::registeKeyBoardEvent()
 		}
 		case EventKeyboard::KeyCode::KEY_A://左方向键;
 		{
+			//人物面向左边时，翻转武器
+			auto weaponBag = m_player->getWeaponBag();
+			for (auto weapon : weaponBag) {
+				weapon->setFlippedX(true);
+				weapon->setRotation(0.0f);
+				Size size = m_player->getSprite()->getContentSize();
+				float coefX = 1 - m_player->getWpPos().x;
+				float coefY = m_player->getWpPos().y;
+				weapon->setPosition(Vec2(0, size.height*coefY));
+			}
+
 			set_ixspeed(-2);
 			key_a = true;
 			m_player->getSprite()->stopAllActions();
-
 			knight_animate = Animation::create();
 			char nameSize[30] = { 0 };
 			for (int i = 1; i <= 4; i++)
@@ -215,6 +225,19 @@ void SimpleMoveController::registeKeyBoardEvent()
 		}
 		case EventKeyboard::KeyCode::KEY_D://右方向键;
 		{
+			//人物面向右边时，武器不翻转
+			auto weaponBag = m_player->getWeaponBag();
+			for (auto weapon : weaponBag) {
+				weapon->setFlippedX(false);
+				weapon->setRotation(0.0f);
+
+				Size size = m_player->getSprite()->getContentSize();
+				float coefX = m_player->getWpPos().x;
+				float coefY = m_player->getWpPos().y;
+				weapon->setPosition(Vec2(size.width*coefX, size.height*coefY));
+
+			}
+
 			key_d = true;
 			m_player->getSprite()->stopAllActions();
 			knight_animate = Animation::create();

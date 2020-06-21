@@ -48,12 +48,18 @@ bool Sword::init(const std::string& filename) {
 }
 
 void Sword::fire(Scene* _currentScene, const Vec2& pos, Entity* player) {
-	//this->getPhysicsBody()->setCategoryBitmask(0x04);
-	//this->getPhysicsBody()->setContactTestBitmask(0x02);
+	
+	//设置武器攻击方向
 	auto direction = pos - this->getParent()->getPosition();
 	direction.normalize();
-	float temp = (-1)*(180 / PI)* atan(direction.y / direction.x);
-	this->setRotation(temp);
+	if (direction.x >= 0 && this->isFlippedX() == false) {
+		float temp = (-1)*(180 / PI)* atan(direction.y / direction.x);
+		this->setRotation(temp);
+	}
+	else if (direction.x < 0 && this->isFlippedX() == true) {
+		float temp = (180 / PI)* atan(direction.y / direction.x);
+		this->setRotation(temp);
+	}
 
 	//创建近战武器攻击范围
 	auto bullet = Bullet::create(_bulletType, this, direction, _currentScene);
